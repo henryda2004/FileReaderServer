@@ -5,19 +5,85 @@ import org.apache.poi.openxml4j.util.ZipEntrySource;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
 
+    static String sentence;
+    static Boolean check;
+    static String word;
+    static String Lastword;
 
+    static File file = new File("/Users/henry/Downloads/txtexample.txt");
+
+    static Scanner scan1;
+
+    static {
+        try {
+            scan1 = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static Scanner scan2;
+
+    static {
+        try {
+            scan2 = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static int lineatxt = 1;
+
+    public static int getline(String palabra){
+        //word = scan2.next();
+
+        //Lastword = sentence.substring(sentence.lastIndexOf(" ")+1);
+        check = sentence.contains(palabra);
+
+        if (check == true){
+            return lineatxt;
+        }
+        lineatxt = lineatxt + 1;
+        sentence = scan1.nextLine();
+        return lineatxt;
+    }
 
     public static void main(String[] args) throws Exception {
-        //File file = new File("/Users/henry/Downloads/pdfexample.pdf");
 
+        sentence = scan1.nextLine();
+        System.out.println(getline("out"));
+        System.out.println(getline("25"));
+        System.out.println(getline("spent"));
+        System.out.println(getline("satellite"));
+
+        /*
+
+        while(scan1.hasNextLine()){
+            System.out.println(scan1.nextLine());
+        }
+        */
+
+
+
+        BufferedReader br = new BufferedReader(new FileReader("/Users/henry/Downloads/txtexample.txt"));
+
+        String ln;
+        int lineIndex = 1;
+        boolean found = false;
+        while((ln = br.readLine()) != null){
+            if (lineIndex == 2){
+                System.out.println(ln);
+                found = true;
+                break;
+            }
+            lineIndex++;
+        }
+/*
         //pal docx
         try{
             XWPFDocument fis = new XWPFDocument(new FileInputStream("C:/Users/henry/Downloads/HenryNúñez_Tarea 1.docx"));
@@ -27,10 +93,6 @@ public class Main {
             System.out.println(e);
         }
 
-
-
-
-        /*
         //pal pedeefe
         FileInputStream fis = new FileInputStream(file);
 
@@ -43,16 +105,10 @@ public class Main {
         pdfdocument.close();
         fis.close();
 
+        //pal tequiste
 
+*/
 
-
-        pal tequiste
-        Scanner scan = new Scanner(file);
-        System.out.println(scan.next());
-        while(scan.hasNextLine()){
-            //System.out.println(scan.nextLine());
-        }
-        */
 
     }
 
