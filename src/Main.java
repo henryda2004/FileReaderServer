@@ -91,11 +91,27 @@ public class Main {
         arbolBinario.agregarNodoBinario("Sguacate", "F", 1);
         arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
         arbolBinario.inOrden(arbolBinario.raiz);
-        if (arbolBinario.buscarNodo("cguacate") == null){
+        if (arbolBinario.buscarNodo("cguacates") == null){
             System.out.println("Nodo no encontrado");
         }else{
             System.out.println(arbolBinario.buscarNodo("cxguacate"));
         }
+
+        ArbolAVL arbolAVL = new ArbolAVL();
+        arbolAVL.insertar("Aguacate", "F", 1);
+        arbolAVL.insertar("banano", "F", 1);
+        arbolAVL.insertar("Agsuacate", "F", 1);
+        arbolAVL.insertar("esacate", "F", 1);
+        arbolAVL.insertar("Aguacate", "F", 1);
+        arbolAVL.insertar("esf", "F", 1);
+        arbolAVL.insertar("Abanico", "F", 1);
+        arbolAVL.inOrden(arbolAVL.obtenerRaiz());
+        if (arbolAVL.buscar("esf") == null){
+            System.out.println("Nodo no encontrado");
+        }else{
+            System.out.println(arbolAVL.buscar("esf").palabra + arbolAVL.buscar("esf").archivo + arbolAVL.buscar("esf").posicion);
+        }
+
 
 /*
 
