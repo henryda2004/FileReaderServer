@@ -83,7 +83,23 @@ public class Main {
             }
             lineIndex++;
         }
+        ArbolBinario arbolBinario = new ArbolBinario();
+        arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
+        arbolBinario.agregarNodoBinario("aguacate", "F", 1);
+        arbolBinario.agregarNodoBinario("bguacate", "F", 1);
+        arbolBinario.agregarNodoBinario("cguacate", "F", 1);
+        arbolBinario.agregarNodoBinario("Sguacate", "F", 1);
+        arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
+        arbolBinario.inOrden(arbolBinario.raiz);
+        if (arbolBinario.buscarNodo("cguacate") == null){
+            System.out.println("Nodo no encontrado");
+        }else{
+            System.out.println(arbolBinario.buscarNodo("cxguacate"));
+        }
+
 /*
+
+
         //pal docx
         try{
             XWPFDocument fis = new XWPFDocument(new FileInputStream("C:/Users/henry/Downloads/HenryNúñez_Tarea 1.docx"));
