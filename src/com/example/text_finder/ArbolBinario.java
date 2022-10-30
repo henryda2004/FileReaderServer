@@ -1,11 +1,13 @@
+package com.example.text_finder;
+
 public class ArbolBinario {
     NodoBinario raiz;
     public ArbolBinario(){
         raiz = null;
     }
     //Metodo para insertar nodo
-    public void agregarNodoBinario(String palabra, String archivo, int posicion){
-        NodoBinario nuevo = new NodoBinario(palabra, archivo, posicion);
+    public void agregarNodoBinario(String palabra, String archivo, int posicion, boolean visitado, boolean confirmarExistencia){
+        NodoBinario nuevo = new NodoBinario(palabra, archivo, posicion, visitado, confirmarExistencia);
         if(raiz == null){
             raiz = nuevo;
         } else {
@@ -55,6 +57,23 @@ public class ArbolBinario {
                 return null;
             }
         }
+        aux.visitado = true;
+        return aux;
+    }
+
+    public NodoBinario buscarExistenciaNodo(String palabra){
+        NodoBinario aux = raiz;
+        while (aux.palabra != palabra && aux.confirmarExistencia == false){
+            if(palabra.compareTo(aux.palabra) <= 0){
+                aux = aux.hijoIzquierdo;
+            } else {
+                aux = aux.hijoDerecho;
+            }
+            if(aux == null){
+                return null;
+            }
+        }
+        aux.confirmarExistencia = true;
         return aux;
     }
 

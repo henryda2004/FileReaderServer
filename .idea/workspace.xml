@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec2959f-c43d-47e9-8af3-f4805654294c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ArbolAVL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/NodoAVL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/Document.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/Quicksort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArbolAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/ArbolAVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/ArbolBinario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodoAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/NodoAVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NodoBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/NodoBinario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +44,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/henry/Downloads/poi-bin-5.2.3-20220909/poi-bin-5.2.3/poi-scratchpad-5.2.3.jar",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "C:/Users/henry/IdeaProjects/FileReaderServer/src/com/example/text_finder",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.39425287"
@@ -48,6 +53,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\henry\IdeaProjects\FileReaderServer\src\com\example\text_finder" />
       <recent name="C:\Users\henry\IdeaProjects\FileReaderServer\Libraries" />
     </key>
   </component>

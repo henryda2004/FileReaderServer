@@ -1,12 +1,12 @@
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.openxml4j.util.ZipEntrySource;
-import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+package com.example.text_finder;
 
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
 
@@ -14,6 +14,7 @@ public class Main {
     static Boolean check;
     static String word;
     static String Lastword;
+
 
     static File file = new File("/Users/henry/Downloads/txtexample.txt");
 
@@ -37,6 +38,16 @@ public class Main {
         }
     }
 
+    static Scanner scan3;
+
+    static {
+        try {
+            scan3 = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static int lineatxt = 1;
 
     public static int getline(String palabra){
@@ -49,20 +60,48 @@ public class Main {
             return lineatxt;
         }
         lineatxt = lineatxt + 1;
-        sentence = scan1.nextLine();
+        if (scan1.hasNextLine()) {
+            sentence = scan1.nextLine();
+        }
         return lineatxt;
     }
 
+
     public static void main(String[] args) throws Exception {
 
-        sentence = scan1.nextLine();
-        System.out.println(getline("out"));
-        System.out.println(getline("25"));
-        System.out.println(getline("spent"));
-        System.out.println(getline("satellite"));
+        ServerSocket serverSocket = null;
+        Socket clientSocket = null;
+        ObjectInputStream in;
+        //ObjectOutputStream out;
+        final int PORT = 5000;
+        //Server
+        try{
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("server is on");
+
+
+            clientSocket = serverSocket.accept();
+            System.out.println("Client connected");
+
+            in = new ObjectInputStream(clientSocket.getInputStream());
+            //out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+
+            Object message = in.readObject();
+            ArrayList<Document> listDocuments = (ArrayList<Document>) message;
+
+            System.out.println(listDocuments);
+
+
+            clientSocket.close();
+            System.out.println("Client disconnected");
+
+        } catch (IOException e){
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
+        }
+
 
         /*
-
         while(scan1.hasNextLine()){
             System.out.println(scan1.nextLine());
         }
@@ -71,7 +110,7 @@ public class Main {
 
 
         BufferedReader br = new BufferedReader(new FileReader("/Users/henry/Downloads/txtexample.txt"));
-
+        /*
         String ln;
         int lineIndex = 1;
         boolean found = false;
@@ -83,7 +122,29 @@ public class Main {
             }
             lineIndex++;
         }
+        */
+
+        //Insertar palabras para txt
+/*
         ArbolBinario arbolBinario = new ArbolBinario();
+        ArbolAVL arbolAVL = new ArbolAVL();
+
+        while (scan3.hasNext()){
+            if (scan1.hasNextLine()) {
+                sentence = scan1.nextLine();
+            }
+            String palabraActual = "";
+            palabraActual = scan3.next();
+            arbolBinario.agregarNodoBinario(palabraActual, String.valueOf(file), getline(palabraActual), false, false);
+            arbolAVL.insertar(palabraActual, String.valueOf(file), getline(palabraActual));
+        }
+        //arbolBinario.agregarNodoBinario("It", "X", 1, false, false);
+        System.out.println(arbolBinario.buscarNodo("It"));
+
+        //arbolBinario.inOrden(arbolBinario.raiz);
+
+
+
         arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
         arbolBinario.agregarNodoBinario("aguacate", "F", 1);
         arbolBinario.agregarNodoBinario("bguacate", "F", 1);
@@ -97,7 +158,6 @@ public class Main {
             System.out.println(arbolBinario.buscarNodo("cxguacate"));
         }
 
-        ArbolAVL arbolAVL = new ArbolAVL();
         arbolAVL.insertar("Aguacate", "F", 1);
         arbolAVL.insertar("banano", "F", 1);
         arbolAVL.insertar("Agsuacate", "F", 1);
@@ -111,12 +171,12 @@ public class Main {
         }else{
             System.out.println(arbolAVL.buscar("esf").palabra + arbolAVL.buscar("esf").archivo + arbolAVL.buscar("esf").posicion);
         }
-
+        */
 
 /*
 
 
-        //pal docx
+        //para docx
         try{
             XWPFDocument fis = new XWPFDocument(new FileInputStream("C:/Users/henry/Downloads/HenryNúñez_Tarea 1.docx"));
             XWPFWordExtractor we = new XWPFWordExtractor(fis);
@@ -125,7 +185,7 @@ public class Main {
             System.out.println(e);
         }
 
-        //pal pedeefe
+        //para pdf
         FileInputStream fis = new FileInputStream(file);
 
         PDDocument pdfdocument = PDDocument.load(fis);

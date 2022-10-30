@@ -1,3 +1,5 @@
+package com.example.text_finder;
+
 public class NodoAVL {
     String palabra;
     String archivo;
