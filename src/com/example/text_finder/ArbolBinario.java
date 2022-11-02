@@ -1,13 +1,17 @@
 package com.example.text_finder;
 
+import java.util.ArrayList;
+
+import static com.example.text_finder.Main.arbolBinario;
+
 public class ArbolBinario {
     NodoBinario raiz;
     public ArbolBinario(){
         raiz = null;
     }
     //Metodo para insertar nodo
-    public void agregarNodoBinario(String palabra, String archivo, int posicion, boolean visitado, boolean confirmarExistencia){
-        NodoBinario nuevo = new NodoBinario(palabra, archivo, posicion, visitado, confirmarExistencia);
+    public void agregarNodoBinario(String palabra, String archivo, int posicion){
+        NodoBinario nuevo = new NodoBinario(palabra, archivo, posicion, 0, 0);
         if(raiz == null){
             raiz = nuevo;
         } else {
@@ -37,44 +41,40 @@ public class ArbolBinario {
         return raiz = null;
     }
     //Metodo para recorrer el arbol Infijo
-    public void inOrden(NodoBinario r){
+    static ArrayList<NodoBinario> list = new ArrayList<NodoBinario>();
+    public void inOrden(NodoBinario r, String palabra, ArrayList<NodoBinario> lista){
+        if ((r != null) && r.palabra.equalsIgnoreCase(palabra)){
+            lista.add(r);
+        }
         if(r != null){
-            inOrden(r.hijoIzquierdo);
+            inOrden(r.hijoIzquierdo, palabra, lista);
             System.out.println(r.palabra);
-            inOrden(r.hijoDerecho);
+            inOrden(r.hijoDerecho, palabra, lista);
         }
     }
     //Metodo para buscar un nodo en el arbol
-    public NodoBinario buscarNodo(String palabra){
-        NodoBinario aux = raiz;
-        while (aux.palabra != palabra){
-            if(palabra.compareTo(aux.palabra) <= 0){
+    static int comparisonsBinary = 1;
+    public void buscarNodo(NodoBinario aux, String palabra, ArrayList<NodoBinario> lista){
+
+        if (aux != null) {
+
+            if (aux.palabra.equalsIgnoreCase(palabra)){
+                aux.binaryComparisons = comparisonsBinary;
+                lista.add(aux);
                 aux = aux.hijoIzquierdo;
+                comparisonsBinary = 1;
+                buscarNodo(aux, palabra, lista);
             } else {
-                aux = aux.hijoDerecho;
-            }
-            if(aux == null){
-                return null;
+                if(palabra.compareTo(aux.palabra) <= 0){
+                    aux = aux.hijoIzquierdo;
+                } else {
+                    aux = aux.hijoDerecho;
+                }
+                comparisonsBinary++;
+                buscarNodo(aux, palabra, lista);
             }
         }
-        aux.visitado = true;
-        return aux;
     }
 
-    public NodoBinario buscarExistenciaNodo(String palabra){
-        NodoBinario aux = raiz;
-        while (aux.palabra != palabra && aux.confirmarExistencia == false){
-            if(palabra.compareTo(aux.palabra) <= 0){
-                aux = aux.hijoIzquierdo;
-            } else {
-                aux = aux.hijoDerecho;
-            }
-            if(aux == null){
-                return null;
-            }
-        }
-        aux.confirmarExistencia = true;
-        return aux;
-    }
 
 }

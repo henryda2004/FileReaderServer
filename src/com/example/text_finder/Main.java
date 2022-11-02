@@ -1,72 +1,118 @@
 package com.example.text_finder;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.example.text_finder.ArbolAVL.listAVL;
+import static com.example.text_finder.ArbolBinario.list;
+
 public class Main {
-
-    static String sentence;
-    static Boolean check;
-    static String word;
-    static String Lastword;
-
-
-    static File file = new File("/Users/henry/Downloads/txtexample.txt");
-
-    static Scanner scan1;
-
-    static {
-        try {
-            scan1 = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+    static ArbolBinario arbolBinario = new ArbolBinario();
+    static ArbolAVL arbolAVL = new ArbolAVL();
+    public static void insertarEnArboles (ClientInformation ci){
+        ArrayList<Document> listDocuments = ci.getLisDocuments();
+        for (int i = 0; i < listDocuments.size(); i++){
+            String[] content = listDocuments.get(i).getContent();
+            for (int c = 0; c < content.length; c++){
+                arbolBinario.agregarNodoBinario(content[c], listDocuments.get(i).getName(), c);
+                arbolAVL.insertar(content[c], listDocuments.get(i).getName(), c);
+            }
         }
+        System.out.println("Nodos insertados correctamente");
+    }
+    public static void buscarEnArboles (String[] toSearch){
+        for (int i = 0; i < toSearch.length; i++){
+            arbolBinario.buscarNodo(arbolBinario.raiz, toSearch[i], list);
+            arbolAVL.inOrden(arbolAVL.obtenerRaiz(), toSearch[i], listAVL);
+
+        }
+        System.out.println("La lista de nodos binarios es:" + list);
+        System.out.println("La lista de nodos AVL es:" + listAVL);
+        for (int i = 0; i < list.size(); i++){
+            for (int x = 0; x < listAVL.size(); x++){
+                if(listAVL.get(x).posicion == list.get(i).posicion){
+                    list.get(i).avlComparisons = listAVL.get(x).comparisonsAvl;
+                }
+            }
+        }
+        System.out.println("La lista de nodos binarios NUEVA es:" + list);
+        System.out.println("Termino busqueda");
+    }
+    static ArrayList<DocumentToSend> documentToSendArrayList= new ArrayList<DocumentToSend>();
+    private static void parsearEnDocumentosEnviables(ClientInformation ci) {
+        ArrayList<Document> listDocuments = ci.getLisDocuments();
+        for (int i = 0; i < listDocuments.size(); i++){
+            String[] content = listDocuments.get(i).getContent();
+            for (int c = 0; c < list.size(); c++){
+                if (list.get(c).archivo == listDocuments.get(i).getName()){
+                    documentToSendArrayList.add(new DocumentToSend(list.get(c).palabra, getLine(list.get(c).posicion, content), posicionNueva, getDate(listDocuments.get(i).getDate()), listDocuments.get(i).getDateInt(), listDocuments.get(i).getWords(), listDocuments.get(i).getName(), list.get(c).getBinaryComparisons(), list.get(c).getAvlComparisons()));
+                }
+            }
+        }
+        System.out.println(documentToSendArrayList);
     }
 
-    static Scanner scan2;
-
-    static {
-        try {
-            scan2 = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    private static String getDate(long date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String formatedDate = simpleDateFormat.format(date);
+        return formatedDate;
     }
 
-    static Scanner scan3;
-
-    static {
-        try {
-            scan3 = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+    static int posicionNueva = 0;
+    private static String getLine(int posicion, String[] content) {
+        String line;
+        if (content.length < 10){
+            posicionNueva = posicion;
+            line = String.valueOf(content);
+            return line;
+        } else {
+            if (posicion == 0){
+                posicionNueva = posicion;
+                line = content[0] + " " + content[1] + " " + content[2] + " " + content[3] + " " + content[4];
+            }
+            else if (posicion == 1){
+                posicionNueva = posicion;
+                line = content[0] + " " + content[1] + " " + content[2] + " " + content[3] + " " + content[4];
+            }
+            else if (posicion == (content.length - 1)){
+                posicionNueva = 4;
+                line = content[(content.length - 5)] + " " + content[(content.length - 4)] + " " + content[(content.length - 3)] + " " + content[(content.length - 2)] + " " + content[(content.length - 1)];
+            }
+            else if(posicion == (content.length - 2)){
+                posicionNueva = 3;
+                line = content[(content.length - 5)] + " " + content[(content.length - 4)] + " " + content[(content.length - 3)] + " " + content[(content.length - 2)] + " " + content[(content.length - 1)];
+            } else{
+                posicionNueva = 2;
+                line = content[(content.length - 2)] + " " + content[(posicion - 1)] + " " + content[posicion] + " " + content[(content.length + 1)] + " " + content[(content.length + 2)];
+            }
+            return line;
         }
     }
+    private static void ordenarDocumentosEnviables(ClientInformation ci) {
+        if (ci.getSort().equalsIgnoreCase("Name")){
+            StringQuickSort sorter = new StringQuickSort();
+            sorter.sort();
+        } else if (ci.getSort().equalsIgnoreCase("Date")){
+            DateBubbleSort ob = new DateBubbleSort();
 
-    static int lineatxt = 1;
-
-    public static int getline(String palabra){
-        //word = scan2.next();
-
-        //Lastword = sentence.substring(sentence.lastIndexOf(" ")+1);
-        check = sentence.contains(palabra);
-
-        if (check == true){
-            return lineatxt;
+        } else {
+            WordsRadixSort radixSort = new WordsRadixSort();
+            radixSort.radixsort();
         }
-        lineatxt = lineatxt + 1;
-        if (scan1.hasNextLine()) {
-            sentence = scan1.nextLine();
-        }
-        return lineatxt;
+        System.out.println("Lista ordenada" + documentToSendArrayList);
+
     }
-
-
     public static void main(String[] args) throws Exception {
 
         ServerSocket serverSocket = null;
@@ -88,10 +134,17 @@ public class Main {
 
 
             Object message = in.readObject();
-            ArrayList<Document> listDocuments = (ArrayList<Document>) message;
+            ClientInformation ci = (ClientInformation) message; //Informacion que me llega del servidor
 
-            System.out.println(listDocuments);
+            insertarEnArboles(ci); //Opero con la informacion que me llega del servidor y se genera un ArrayList con los documentos ordenados
+            buscarEnArboles(ci.getToSearch());
+            parsearEnDocumentosEnviables(ci);
+            ordenarDocumentosEnviables(ci);
 
+
+            System.out.println(ci);
+
+            //out.writeObject(documentToSendArrayList); //Envio el arraylist
 
             clientSocket.close();
             System.out.println("Client disconnected");
@@ -101,107 +154,10 @@ public class Main {
         }
 
 
-        /*
-        while(scan1.hasNextLine()){
-            System.out.println(scan1.nextLine());
-        }
-        */
-
-
-
-        BufferedReader br = new BufferedReader(new FileReader("/Users/henry/Downloads/txtexample.txt"));
-        /*
-        String ln;
-        int lineIndex = 1;
-        boolean found = false;
-        while((ln = br.readLine()) != null){
-            if (lineIndex == 2){
-                System.out.println(ln);
-                found = true;
-                break;
-            }
-            lineIndex++;
-        }
-        */
-
-        //Insertar palabras para txt
-/*
-        ArbolBinario arbolBinario = new ArbolBinario();
-        ArbolAVL arbolAVL = new ArbolAVL();
-
-        while (scan3.hasNext()){
-            if (scan1.hasNextLine()) {
-                sentence = scan1.nextLine();
-            }
-            String palabraActual = "";
-            palabraActual = scan3.next();
-            arbolBinario.agregarNodoBinario(palabraActual, String.valueOf(file), getline(palabraActual), false, false);
-            arbolAVL.insertar(palabraActual, String.valueOf(file), getline(palabraActual));
-        }
-        //arbolBinario.agregarNodoBinario("It", "X", 1, false, false);
-        System.out.println(arbolBinario.buscarNodo("It"));
-
-        //arbolBinario.inOrden(arbolBinario.raiz);
-
-
-
-        arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
-        arbolBinario.agregarNodoBinario("aguacate", "F", 1);
-        arbolBinario.agregarNodoBinario("bguacate", "F", 1);
-        arbolBinario.agregarNodoBinario("cguacate", "F", 1);
-        arbolBinario.agregarNodoBinario("Sguacate", "F", 1);
-        arbolBinario.agregarNodoBinario("Aguacate", "F", 1);
-        arbolBinario.inOrden(arbolBinario.raiz);
-        if (arbolBinario.buscarNodo("cguacates") == null){
-            System.out.println("Nodo no encontrado");
-        }else{
-            System.out.println(arbolBinario.buscarNodo("cxguacate"));
-        }
-
-        arbolAVL.insertar("Aguacate", "F", 1);
-        arbolAVL.insertar("banano", "F", 1);
-        arbolAVL.insertar("Agsuacate", "F", 1);
-        arbolAVL.insertar("esacate", "F", 1);
-        arbolAVL.insertar("Aguacate", "F", 1);
-        arbolAVL.insertar("esf", "F", 1);
-        arbolAVL.insertar("Abanico", "F", 1);
-        arbolAVL.inOrden(arbolAVL.obtenerRaiz());
-        if (arbolAVL.buscar("esf") == null){
-            System.out.println("Nodo no encontrado");
-        }else{
-            System.out.println(arbolAVL.buscar("esf").palabra + arbolAVL.buscar("esf").archivo + arbolAVL.buscar("esf").posicion);
-        }
-        */
-
-/*
-
-
-        //para docx
-        try{
-            XWPFDocument fis = new XWPFDocument(new FileInputStream("C:/Users/henry/Downloads/HenryNúñez_Tarea 1.docx"));
-            XWPFWordExtractor we = new XWPFWordExtractor(fis);
-            System.out.println(we.getText());
-        } catch (Exception e){
-            System.out.println(e);
-        }
-
-        //para pdf
-        FileInputStream fis = new FileInputStream(file);
-
-        PDDocument pdfdocument = PDDocument.load(fis);
-        System.out.println(pdfdocument.getPages().getCount());
-        PDFTextStripper pdfTextStripper = new PDFTextStripper();
-        String docText = pdfTextStripper.getText(pdfdocument);
-        System.out.println(docText);
-
-        pdfdocument.close();
-        fis.close();
-
-        //pal tequiste
-
-*/
-
 
     }
+
+
+
 
 }

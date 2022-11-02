@@ -1,22 +1,23 @@
 package com.example.text_finder;
 
-class StringQuickSort {
+import java.util.ArrayList;
+
+import static com.example.text_finder.Main.documentToSendArrayList;
+
+public class StringQuickSort {
 
     String names[];
     int length;
 
-    public static void main(String[] args) {
-        StringQuickSort sorter = new StringQuickSort();
-        String words[] = {"alinaarchvio", "abuelacarpeta", "abuelaarchivo", "marianadoc", "dochenry", "pdfhenry", "zzdoc"}; // the strings need to be sorted are put inside this array
-        sorter.sort(words);
-
-        for (String i : words) {
-            System.out.print(i);
-            System.out.print(" ");
+    void sort() {
+        String palabras = "";
+        for (int i = 0; i < documentToSendArrayList.size(); i++){
+            palabras = palabras + documentToSendArrayList.get(i).getName() + " "  ;
         }
-    }
-
-    void sort(String array[]) {
+        String[] array = palabras.split(" ");
+        for(int i = 0; i < array.length; i++){
+            System.out.println("word["+i+"] = " +array[i]);
+        }
         if (array == null || array.length == 0) {
             return;
         }
@@ -58,5 +59,9 @@ class StringQuickSort {
         String temp = this.names[i];
         this.names[i] = this.names[j];
         this.names[j] = temp;
+
+        DocumentToSend tempD = documentToSendArrayList.get(i);
+        documentToSendArrayList.set(i, documentToSendArrayList.get(j));
+        documentToSendArrayList.set(j, tempD);
     }
 }

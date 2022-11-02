@@ -1,5 +1,7 @@
 package com.example.text_finder;
 
+import java.util.ArrayList;
+
 public class ArbolAVL {
 
     private NodoAVL raiz;
@@ -9,20 +11,28 @@ public class ArbolAVL {
     }
 
     //Buscar
-    public NodoAVL buscar(String palabra){
-        NodoAVL aux = raiz;
-        while (aux.palabra != palabra){
-            if(palabra.compareTo(aux.palabra) <= 0){
-                aux = aux.hijoIzquierdo;
-            } else {
+    static ArrayList<NodoAVL> listAVL = new ArrayList<NodoAVL>();
+    public void buscar(NodoAVL aux, String palabra, ArrayList<NodoAVL> lista){
+
+        if (aux != null) {
+
+            if (aux.palabra.equalsIgnoreCase(palabra)){
+                lista.add(aux);
                 aux = aux.hijoDerecho;
+                buscar(aux, palabra, lista);
+            } else {
+                if(palabra.compareTo(aux.palabra) <= 0){
+                    aux = aux.hijoIzquierdo;
+                } else {
+                    aux = aux.hijoDerecho;
+                }
+                buscar(aux, palabra, lista);
             }
-            if(aux == null){
-                return null;
-            }
+
+
         }
-        return aux;
     }
+
     //Obtener Factor de equilibrio
     public int obtenerFE(NodoAVL x){
         if (x == null){
@@ -105,7 +115,7 @@ public class ArbolAVL {
     }
     //Metodo para insertar
     public void insertar(String palabra, String archivo, int posicion){
-        NodoAVL nuevo = new NodoAVL(palabra, archivo, posicion);
+        NodoAVL nuevo = new NodoAVL(palabra, archivo, posicion, 0);
         if (raiz == null){
             raiz = nuevo;
         }else {
@@ -113,11 +123,18 @@ public class ArbolAVL {
         }
     }
     //Recorrido
-    public void inOrden(NodoAVL r){
-        if (r != null){
-            inOrden(r.hijoIzquierdo);
-            System.out.println(r.palabra + ", ");
-            inOrden(r.hijoDerecho);
+    static int comparisonsAvl = 0;
+    public void inOrden(NodoAVL r, String palabra, ArrayList<NodoAVL> lista){
+        comparisonsAvl++;
+        if ((r != null) && r.palabra.equalsIgnoreCase(palabra)){
+            r.comparisonsAvl = comparisonsAvl;
+            lista.add(r);
+            comparisonsAvl = 0;
+        }
+        if(r != null){
+            inOrden(r.hijoIzquierdo, palabra, lista);
+            System.out.println(r.palabra);
+            inOrden(r.hijoDerecho, palabra, lista);
         }
     }
 
