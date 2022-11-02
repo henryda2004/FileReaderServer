@@ -5,8 +5,16 @@ import java.util.Arrays;
 
 import static com.example.text_finder.Main.documentToSendArrayList;
 
+/**
+ * ordena mediante radix la cantidad de palabras
+ */
 public class WordsRadixSort {
-    // A utility function to get maximum value in arr[]
+    /**
+     * obtiene el mayor valor de la lista
+     * @param arr
+     * @param n
+     * @return
+     */
     static int getMax(String[] arr, int n)
     {
         int mx = Integer.parseInt(arr[0]);
@@ -16,8 +24,12 @@ public class WordsRadixSort {
         return mx;
     }
 
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
+    /**
+     * cuenta el digito que se va arreglando
+     * @param arr
+     * @param n
+     * @param exp
+     */
     static void countSort(String[] arr, int n, int exp)
     {
         int output[] = new int[n]; // output array
@@ -25,34 +37,31 @@ public class WordsRadixSort {
         int count[] = new int[10];
         Arrays.fill(count, 0);
 
-        // Store count of occurrences in count[]
+
         for (i = 0; i < n; i++)
             count[(Integer.parseInt(arr[i]) / exp) % 10]++;
 
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
+
         for (i = 1; i < 10; i++)
             count[i] += count[i - 1];
 
 
-        // Build the output array
+
         for (i = n - 1; i >= 0; i--) {
             output[count[(Integer.parseInt(arr[i]) / exp) % 10] - 1] = Integer.parseInt(arr[i]);
             count[(Integer.parseInt(arr[i]) / exp) % 10]--;
 
         }
 
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to current
-        // digit
         for (i = 0; i < n; i++)
             arr[i] = String.valueOf(output[i]);
 
 
     }
 
-    // The main function to that sorts arr[] of
-    // size n using Radix Sort
+    /**
+     * ejecuta radix principal
+     */
     static void radixsort()
     {
         String palabras = "";

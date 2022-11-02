@@ -2,7 +2,13 @@ package com.example.text_finder;
 
 import static com.example.text_finder.Main.documentToSendArrayList;
 
+/**
+ * metodo de copia de lista radix a nodos con metodo bubble
+ */
 public class RadixBubbleSortExtension {
+    /**
+     * metodo bubble
+     */
     void DateBubbleSort(){
         String palabras = "";
         for (int i = 0; i < documentToSendArrayList.size(); i++){
@@ -28,8 +34,5 @@ public class RadixBubbleSortExtension {
                 }
     }
 
-    /* Prints the array */
-
-    // Driver method to test above
 }
 

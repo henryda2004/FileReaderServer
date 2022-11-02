@@ -2,16 +2,29 @@ package com.example.text_finder;
 
 import java.util.ArrayList;
 
+/**
+ * Contiene arbol avl
+ */
 public class ArbolAVL {
 
     private NodoAVL raiz;
 
+    /**
+     * incializa arbol
+     */
     public ArbolAVL(){
         raiz = null;
     }
 
     //Buscar
     static ArrayList<NodoAVL> listAVL = new ArrayList<NodoAVL>();
+
+    /**
+     * busca en avl
+     * @param aux
+     * @param palabra
+     * @param lista
+     */
     public void buscar(NodoAVL aux, String palabra, ArrayList<NodoAVL> lista){
 
         if (aux != null) {
@@ -34,6 +47,12 @@ public class ArbolAVL {
     }
 
     //Obtener Factor de equilibrio
+
+    /**
+     * obtiene factor de equilibrio
+     * @param x
+     * @return
+     */
     public int obtenerFE(NodoAVL x){
         if (x == null){
             return -1;
@@ -42,6 +61,12 @@ public class ArbolAVL {
         }
     }
     //Rotacion Simple Izquierda
+
+    /**
+     * rotacion simple izquierda
+     * @param c
+     * @return
+     */
     public NodoAVL rotacionIzquierda(NodoAVL c){
         NodoAVL auxiliar = c.hijoIzquierdo;
         c.hijoIzquierdo = auxiliar.hijoDerecho;
@@ -51,6 +76,12 @@ public class ArbolAVL {
         return auxiliar;
     }
     //Rotacion Simple Derecha
+
+    /**
+     * rotacion simple derecha
+     * @param c
+     * @return
+     */
     public NodoAVL rotacionDerecha(NodoAVL c){
         NodoAVL auxiliar = c.hijoDerecho;
         c.hijoDerecho = auxiliar.hijoIzquierdo;
@@ -60,6 +91,12 @@ public class ArbolAVL {
         return auxiliar;
     }
     //Rotacion Doble a la Izquierda
+
+    /**
+     * rotacion doble izquierda
+     * @param z
+     * @return
+     */
     public NodoAVL rotacionDobleIzquierda(NodoAVL z){
         NodoAVL auxiliar;
         z.hijoIzquierdo = rotacionDerecha(z.hijoIzquierdo);
@@ -67,6 +104,12 @@ public class ArbolAVL {
         return auxiliar;
     }
     //Rotacion Doble a la Derecha
+
+    /**
+     * rotacion doble derecha
+     * @param z
+     * @return
+     */
     public NodoAVL rotacionDobleDerecha(NodoAVL z){
         NodoAVL auxiliar;
         z.hijoDerecho = rotacionIzquierda(z.hijoDerecho);
@@ -74,6 +117,13 @@ public class ArbolAVL {
         return auxiliar;
     }
     //Metodo para insertar un nodo
+
+    /**
+     * insertar nodo
+     * @param nuevo
+     * @param subAr
+     * @return
+     */
     public NodoAVL insertarAVL(NodoAVL nuevo, NodoAVL subAr){
         NodoAVL nuevoPadre = subAr;
         if(nuevo.palabra.compareTo(subAr.palabra) <= 0){
@@ -114,6 +164,13 @@ public class ArbolAVL {
         return  nuevoPadre;
     }
     //Metodo para insertar
+
+    /**
+     * insertar archivo
+     * @param palabra
+     * @param archivo
+     * @param posicion
+     */
     public void insertar(String palabra, String archivo, int posicion){
         NodoAVL nuevo = new NodoAVL(palabra, archivo, posicion, 0);
         if (raiz == null){
@@ -124,6 +181,13 @@ public class ArbolAVL {
     }
     //Recorrido
     static int comparisonsAvl = 0;
+
+    /**
+     * recorrido in orden
+     * @param r
+     * @param palabra
+     * @param lista
+     */
     public void inOrden(NodoAVL r, String palabra, ArrayList<NodoAVL> lista){
         comparisonsAvl++;
         if ((r != null) && r.palabra.equalsIgnoreCase(palabra)){
@@ -138,6 +202,10 @@ public class ArbolAVL {
         }
     }
 
+    /**
+     * obtiene raiz
+     * @return
+     */
     //Obtener raiz
     public NodoAVL obtenerRaiz(){
         return raiz;

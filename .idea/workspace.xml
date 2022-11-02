@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec2959f-c43d-47e9-8af3-f4805654294c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/ClientInformation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/DateBubbleSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/DocumentToSend.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/RadixBubbleSortExtension.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/ServerInformation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/StringQuickSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/text_finder/WordsRadixSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/ArbolAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/ArbolAVL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/ArbolBinario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/ClientInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/ClientInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/DateBubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/DateBubbleSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/DocumentToSend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/DocumentToSend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/NodoAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/NodoAVL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/NodoBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/NodoBinario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/Quicksort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/RadixBubbleSortExtension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/RadixBubbleSortExtension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/ServerInformation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/StringQuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/StringQuickSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/text_finder/WordsRadixSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/text_finder/WordsRadixSort.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

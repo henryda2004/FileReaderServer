@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 import static com.example.text_finder.Main.documentToSendArrayList;
 
+/**
+ * ordena por nombre en quicksort
+ */
 public class StringQuickSort {
 
     String names[];
     int length;
 
+    /**
+     * ejecuta ordenamiento principal
+     */
     void sort() {
         String palabras = "";
         for (int i = 0; i < documentToSendArrayList.size(); i++){
@@ -26,6 +32,11 @@ public class StringQuickSort {
         quickSort(0, length - 1);
     }
 
+    /**
+     * hace iteraciones de metodo
+     * @param lowerIndex
+     * @param higherIndex
+     */
     void quickSort(int lowerIndex, int higherIndex) {
         int i = lowerIndex;
         int j = higherIndex;
@@ -55,6 +66,11 @@ public class StringQuickSort {
         }
     }
 
+    /**
+     * intercambia nodos
+     * @param i
+     * @param j
+     */
     void exchangeNames(int i, int j) {
         String temp = this.names[i];
         this.names[i] = this.names[j];

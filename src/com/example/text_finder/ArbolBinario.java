@@ -4,12 +4,26 @@ import java.util.ArrayList;
 
 import static com.example.text_finder.Main.arbolBinario;
 
+/**
+ * contiene arbol binario y metodos
+ */
 public class ArbolBinario {
     NodoBinario raiz;
+
+    /**
+     * inicializa arbol
+     */
     public ArbolBinario(){
         raiz = null;
     }
     //Metodo para insertar nodo
+
+    /**
+     * agrega nodo binario
+     * @param palabra
+     * @param archivo
+     * @param posicion
+     */
     public void agregarNodoBinario(String palabra, String archivo, int posicion){
         NodoBinario nuevo = new NodoBinario(palabra, archivo, posicion, 0, 0);
         if(raiz == null){
@@ -37,23 +51,18 @@ public class ArbolBinario {
         }
     }
     //Metodo para saber si el arbol esta vacio
-    public NodoBinario estaVacio(){
-        return raiz = null;
-    }
-    //Metodo para recorrer el arbol Infijo
+
+
     static ArrayList<NodoBinario> list = new ArrayList<NodoBinario>();
-    public void inOrden(NodoBinario r, String palabra, ArrayList<NodoBinario> lista){
-        if ((r != null) && r.palabra.equalsIgnoreCase(palabra)){
-            lista.add(r);
-        }
-        if(r != null){
-            inOrden(r.hijoIzquierdo, palabra, lista);
-            System.out.println(r.palabra);
-            inOrden(r.hijoDerecho, palabra, lista);
-        }
-    }
     //Metodo para buscar un nodo en el arbol
     static int comparisonsBinary = 1;
+
+    /**
+     * busca nodo
+     * @param aux
+     * @param palabra
+     * @param lista
+     */
     public void buscarNodo(NodoBinario aux, String palabra, ArrayList<NodoBinario> lista){
 
         if (aux != null) {
