@@ -16,7 +16,7 @@ public class RadixBubbleSortExtension {
         }
         String[] array = palabras.split(" ");
         for(int i = 0; i < array.length; i++){
-            System.out.println("word["+i+"] = " +array[i]);
+            System.out.println("words["+i+"] = " +array[i]);
         }
 
         int n = array.length;

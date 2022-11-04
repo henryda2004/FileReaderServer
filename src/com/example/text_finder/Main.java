@@ -124,7 +124,7 @@ public class Main {
                 line = content[(content.length - 5)] + " " + content[(content.length - 4)] + " " + content[(content.length - 3)] + " " + content[(content.length - 2)] + " " + content[(content.length - 1)];
             } else{
                 posicionNueva = 2;
-                line = content[(content.length - 2)] + " " + content[(posicion - 1)] + " " + content[posicion] + " " + content[(content.length + 1)] + " " + content[(content.length + 2)];
+                line = content[(posicion - 2)] + " " + content[(posicion - 1)] + " " + content[posicion] + " " + content[(posicion + 1)] + " " + content[(posicion + 2)];
             }
             return line;
         }
@@ -149,17 +149,19 @@ public class Main {
 
     }
 
+
     /**
      * ejecuta el socketserver
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
+        ArrayList<Integer> integers = new ArrayList<Integer>();
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
         ObjectInputStream in;
-        //ObjectOutputStream out;
+        //DataOutputStream out;
+        ObjectOutputStream outO;
         final int PORT = 5000;
         //Server
         try{
@@ -171,8 +173,8 @@ public class Main {
             System.out.println("Client connected");
 
             in = new ObjectInputStream(clientSocket.getInputStream());
-            //out = new ObjectOutputStream(clientSocket.getOutputStream());
-
+            //out = new DataOutputStream(clientSocket.getOutputStream());
+            outO = new ObjectOutputStream(clientSocket.getOutputStream());
 
             Object message = in.readObject();
             ClientInformation ci = (ClientInformation) message; //Informacion que me llega del servidor
@@ -185,8 +187,8 @@ public class Main {
 
             System.out.println(ci);
 
-            //out.writeObject(documentToSendArrayList); //Envio el arraylist
-
+            //out.writeUTF("empanada");
+            outO.writeObject(documentToSendArrayList);
             clientSocket.close();
             System.out.println("Client disconnected");
 
