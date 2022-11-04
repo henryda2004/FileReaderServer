@@ -70,9 +70,7 @@ public class WordsRadixSort {
         }
         String[] arr = palabras.split(" ");
         String[] nodos = palabras.split(" ");
-        for(int i = 0; i < arr.length; i++){
-            System.out.println("word["+i+"] = " +arr[i]);
-        }
+
         int n = arr.length;
 
         int m = getMax(arr, n);
